@@ -67,6 +67,7 @@ while True:
         msg['Subject'] = '['+id+'] Observation Data'
         
         body = '''Your observation has been carried out by PICTOR successfully!
+
 Observation name: '''+obs_name+'''
 Observation datetime: '''+obsDT+''' (UTC+3)
 Center frequency: '''+f_center+''' Hz
