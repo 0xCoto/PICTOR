@@ -1,6 +1,8 @@
 # PICTOR
 PICTOR is an open-source radio telescope that allows anyone to observe the radio sky, using its convenient web platform for free: https://www.pictortelescope.com
 
+![alt text](https://i.imgur.com/MjS3WcT.jpg "The PICTOR Radio Telescope")
+
 ## About PICTOR
 PICTOR consists of a 1.5-meter parabolic antenna that allows anyone to make continuous and spectral (i.e. [hydrogen line](https://www.cv.nrao.edu/course/astr534/HILine.html)) drift-scan observations of the radio sky in the **1300~1700 MHz** regime for free. 
 
@@ -26,7 +28,7 @@ PICTOR is a **fully open source** (software & hardware) project.
 S-Parameter of the monopole inside the feed:
 ![alt text](https://i.imgur.com/XLsuTv4.png "S-Parameter of the monopole")
 
-S-Parameter of the feedhorn (with rod) - this should be the considered S-Parameter of the antenna in its entirety:
+S-Parameter of the feedhorn (with rod) - **this should be the considered S-Parameter of the antenna in its entirety**:
 ![alt text](https://i.imgur.com/6cMjMpz.png "S-Parameter of the feedhorn")
 
 Measured with the Keysight N5221A PNA Network Analyzer (10 MHz~13.5 GHz):
