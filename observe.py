@@ -56,15 +56,15 @@ while True:
         sys.argv = ['plot.py', 'freq='+f_center, 'samp_rate='+bandwidth, 'nchan='+channels, 'nbin='+nbins]
         execfile('/home/pictor/Desktop/pictortelescope/plot.py')
         
-        #Send plot to observer's email
+        #Send raw data to archive
         fromaddr = 'pictortelescope@gmail.com'
-        toaddr = email
+        toaddr = fromaddr
         
         msg = MIMEMultipart()
         msg['From'] = fromaddr
         msg['To'] = toaddr
         
-        msg['Subject'] = '['+id+'] Observation Data'
+        msg['Subject'] = '['+id+'] Raw Observation Data'
         
         body = '''Your observation has been carried out by PICTOR successfully!
 
@@ -82,7 +82,7 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         
         msg.attach(MIMEText(body, 'plain'))
         
-        filename = 'plot.png'
+        filename = 'observation.dat'
         attachment = open("/home/pictor/Desktop/pictortelescope/"+filename, 'rb')
         
         p = MIMEBase('application', 'octet-stream')
