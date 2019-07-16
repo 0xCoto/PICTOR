@@ -77,6 +77,7 @@ Number of channels: '''+channels+'''
 Number of bins: '''+nbins+'''
 Observation duration: '''+duration+''' sec
 Observation ID: '''+id+'''
+
 Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs Time plot are attached in this email as an image.'''
         
         msg.attach(MIMEText(body, 'plain'))
