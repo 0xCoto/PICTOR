@@ -13,7 +13,7 @@ while True:
     while True:
         #Get observation parameters
         try:
-            response = requests.get('https://pictortelescope.com/last_obs.txt')
+            response = requests.get('https://pictortelescope.com/last_obs.txt', auth=('XXX', 'XXX')) #XXX: plaintext credentials
             if response.status_code == 200:
                 exec(response.content)
                 if id not in open('/home/pictor/Desktop/pictortelescope/id_history.txt').read():
