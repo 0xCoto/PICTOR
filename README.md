@@ -24,6 +24,9 @@ PICTOR is a **fully open source** (software & hardware) project.
 
 *\*Deemed unnecessary hence removed*
 
+## Feedhorn Dimensions
+![alt text](https://i.imgur.com/557vUio.png "Feedhorn dimensions")
+
 ## S-Parameters
 S-Parameter of the monopole inside the feed:
 ![alt text](https://i.imgur.com/XLsuTv4.png "S-Parameter of the monopole")
