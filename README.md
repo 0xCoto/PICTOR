@@ -29,7 +29,7 @@ PICTOR is a **fully open source** (software & hardware) project.
 
 ## S-Parameters
 S-Parameter of the monopole inside the feed:
-![alt text](https://i.imgur.com/XLsuTv4.png "S-Parameter of the monopole")
+![alt text](https://i.imgur.com/S7xh9bg.png "S-Parameter of the monopole")
 
 S-Parameter of the feedhorn (with rod) - **this should be the considered S-Parameter of the antenna in its entirety**:
 ![alt text](https://i.imgur.com/6cMjMpz.png "S-Parameter of the feedhorn")
