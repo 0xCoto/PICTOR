@@ -34,12 +34,15 @@ S-Parameter of the monopole inside the feed:
 S-Parameter of the feedhorn (with rod) - **this should be the considered S-Parameter of the antenna in its entirety**:
 ![alt text](https://i.imgur.com/6cMjMpz.png "S-Parameter of the feedhorn")
 
-Measured with the Keysight N5221A PNA Network Analyzer (10 MHz~13.5 GHz):
+Measured with the **Keysight N5221A PNA Network Analyzer (10 MHz~13.5 GHz)**:
 ![alt text](https://i.imgur.com/i9wenwo.jpg "Measurement of the monopole at the lab")
 ![alt text](https://i.imgur.com/f2LOvkE.jpg "Measurement of the feedhorn at the lab")
 
 ## Telescope Block Diagram
 ![alt text](https://i.imgur.com/C9ow5Fk.jpg "Block Diagram")
+
+## Example Observation
+![alt text](https://i.imgur.com/XbxHLbW.png "Example Observation")
 
 ## Wish to observe with PICTOR?
 Take a look at the [PDF guide](https://www.pictortelescope.com/Observing_the_radio_sky_with_PICTOR.pdf) containing all the information you need to know in order to conduct your first observation of the radio sky!
