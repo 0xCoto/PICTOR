@@ -52,6 +52,7 @@ File | Description
 --- | --- 
 `observe.py` | Listens for observation requests & conducts observations
 `plot.py` | Produces plots from observation data
+`plot_hi.py` | Produces HI-tailored plots (i.e. +calibrated spectrum) from observation data
 `id_history.txt` | Serves as an observation ID history database
 `pictor.grc` | [GRC](https://wiki.gnuradio.org/index.php/GNURadioCompanion) Flowgraph for recording the data
 `top_block.py` | Embedded Python Block for `pictor.grc`
