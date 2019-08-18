@@ -59,6 +59,6 @@ File | Description
 `observe.php` | Includes server-side PHP code for [/observe](https://www.pictortelescope.com/observe)
 
 ## Credits
-PICTOR was built by [Apostolos Spanakis-Misirlis](https://www.github.com/0xCoto/).
+PICTOR was built by **[Apostolos Spanakis-Misirlis](https://www.github.com/0xCoto/)88.
 
-Special thanks to **Dr. Cameron Van Eck** for his thorough guidance throughout the development of PICTOR, the **[Telecommunication Systems Laboratory](http://tsl.ds.unipi.gr/)** of the [Department of Digital Systems](https://www.ds.unipi.gr/en/) at the [University of Piraeus](https://www.unipi.gr/unipi/en/) for allowing us to conduct decisive antenna measurements, the [Dwingeloo Radio Observatory](https://www.camras.nl/en/) (**Paul Boven** & **Cees Bassa**) for helping with the recording & the plotting of the data and **[Yannick](https://www.github.com/YannickDC)** & **[Tino](https://www.github.com/RononDex/)** for their back-end contribution to `observe.php`.
+Special thanks to **Dr. Cameron Van Eck** for his thorough guidance throughout the development of PICTOR, the **[Telecommunication Systems Laboratory](http://tsl.ds.unipi.gr/)** of the [Department of Digital Systems](https://www.ds.unipi.gr/en/) at the [University of Piraeus](https://www.unipi.gr/unipi/en/) for allowing us to conduct decisive antenna measurements, the [Dwingeloo Radio Observatory](https://www.camras.nl/en/) (**Paul Boven** & **Cees Bassa**) for helping with the recording & the plotting of the data, **[Vasilis Spanakis-Misirlis](mailto:meiko_dew@hotmail.com)** for his engineering assistance and **[Yannick](https://www.github.com/YannickDC)** & **[Tino](https://www.github.com/RononDex/)** for their back-end contribution to `observe.php`.
