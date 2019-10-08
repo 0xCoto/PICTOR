@@ -24,6 +24,12 @@ PICTOR is a **fully open source** (software & hardware) project.
 
 *\*Deemed unnecessary hence removed*
 
+## Telescope Block Diagram
+![alt text](https://i.imgur.com/C9ow5Fk.jpg "Telescope Block Diagram")
+
+## PICTOR System Flowgraph
+![alt text](https://i.imgur.com/AOdftxe.png "PICTOR flowgraph")
+
 ## Feedhorn Dimensions
 ![alt text](https://i.imgur.com/557vUio.png "Feedhorn dimensions")
 
@@ -37,9 +43,6 @@ S-Parameter of the feedhorn (with rod) - **this should be the considered S-Param
 Measured with the **Keysight N5221A PNA Network Analyzer (10 MHz~13.5 GHz)**:
 ![alt text](https://i.imgur.com/i9wenwo.jpg "Measurement of the monopole at the lab")
 ![alt text](https://i.imgur.com/f2LOvkE.jpg "Measurement of the feedhorn at the lab")
-
-## Telescope Block Diagram
-![alt text](https://i.imgur.com/C9ow5Fk.jpg "Block Diagram")
 
 ## Example Observation
 ![alt text](https://i.imgur.com/XbxHLbW.png "Example Observation")
