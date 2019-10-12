@@ -7,20 +7,24 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+from shutil import copy2
 from time import sleep
 
 while True:
     while True:
         #Get observation parameters
+        sleep(10)
         try:
-            response = requests.get('https://pictortelescope.com/last_obs.txt', auth=('XXX', 'XXX')) #XXX: plaintext credentials
+            response = requests.get('https://pictortelescope.com/last_obs.txt', auth=('XXX', 'XXX')) #plaintext credentials
             if response.status_code == 200:
                 exec(response.content)
-                if id not in open('/home/pictor/Desktop/pictortelescope/id_history.txt').read():
+                if id not in open('/home/pictor/Desktop/pictortelescope/id_history.txt').read() and 'notpictor' not in obs_name:
                     break
-        except:
+            else:
+                print(response.status_code)
+        except Exception as e:
+            print(e)
             pass
-        sleep(10)
     
     #Reformat & define GRC observation parameters
     f_center = str(float(f_center)*10**6)
@@ -52,9 +56,21 @@ while True:
         sys.argv = ['top_block.py', '--c-freq='+f_center, '--samp-rate='+bandwidth, '--nchan='+channels, '--nbin='+nbins, '--obs-time='+duration]
         execfile('/home/pictor/Desktop/pictortelescope/top_block.py')
         
-        #Execute plot.py to generate averaged & dynamic spectra
-        sys.argv = ['plot.py', 'freq='+f_center, 'samp_rate='+bandwidth, 'nchan='+channels, 'nbin='+nbins]
-        execfile('/home/pictor/Desktop/pictortelescope/plot.py')
+        #Execute plotter
+        if f_center == '1420000000.0' and bandwidth == '2400000' and (channels == '1024' or channels == '2048'):
+            sys.argv = ['plot_hi.py', 'freq='+f_center, 'samp_rate='+bandwidth, 'nchan='+channels, 'nbin='+nbins]
+            execfile('/home/pictor/Desktop/pictortelescope/plot_hi.py')
+        else:
+            sys.argv = ['plot.py', 'freq='+f_center, 'samp_rate='+bandwidth, 'nchan='+channels, 'nbin='+nbins]
+            execfile('/home/pictor/Desktop/pictortelescope/plot.py')
+        
+        with open('/home/pictor/Desktop/pictortelescope/id_history.txt', 'a') as id_logfile:
+            id_logfile.write(id+'\n')
+        
+        if obs_name == 'off1024':
+            copy2('/home/pictor/Desktop/pictortelescope/observation.dat', '/home/pictor/Desktop/pictortelescope/off1024.dat')
+        elif obs_name == 'off2048':
+            copy2('/home/pictor/Desktop/pictortelescope/observation.dat', '/home/pictor/Desktop/pictortelescope/off2048.dat')
         
         #Send plot to observer's email
         fromaddr = 'pictortelescope@gmail.com'
@@ -94,7 +110,7 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        s.login(fromaddr, 'XXX') #XXX: plaintext email password
+        s.login(fromaddr, 'XXX') #plaintext email password
         
         text = msg.as_string()
         
@@ -113,6 +129,7 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         
         body = '''Your observation has been carried out by PICTOR successfully!
 
+Observer email: '''+email+'''
 Observation name: '''+obs_name+'''
 Observation datetime: '''+obsDT+''' (UTC+3)
 Center frequency: '''+f_center+''' Hz
@@ -139,15 +156,13 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        s.login(fromaddr, 'XXX') #XXX: plaintext email password
+        s.login(fromaddr, 'XXX') #plaintext email password
         
         text = msg.as_string()
         
         s.sendmail(fromaddr, toaddr, text)
         s.quit()
         
-        with open('/home/pictor/Desktop/pictortelescope/id_history.txt', 'a') as id_logfile:
-            id_logfile.write(id+'\n')
-    
-    except:
+    except Exception as e:
+        print(e)
         pass
