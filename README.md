@@ -63,9 +63,11 @@ File | Description
 `plot.py` | Produces plots from observation data
 `plot_hi.py` | Produces HI-tailored plots (i.e. +calibrated spectrum) from observation data
 `id_history.txt` | Serves as an observation ID history database
-`pictor.grc` | [GRC](https://wiki.gnuradio.org/index.php/GNURadioCompanion) Flowgraph for recording the data
+`pictor.grc` | Previous [GRC](https://wiki.gnuradio.org/index.php/GNURadioCompanion) Flowgraph used for the recording and processing of the data
+`pfb.grc` | [GRC](https://wiki.gnuradio.org/index.php/GNURadioCompanion) Polyphase Filterbank Flowgraph for efficient data acquisition
 `top_block.py` | Embedded Python Block for `pictor.grc`
 `observe.php` | Includes server-side PHP code for [/observe](https://www.pictortelescope.com/observe)
+`Waveguide.stl` | STL file for feedhorn visualization
 
 ## Credits
 PICTOR was built by **[Apostolos Spanakis-Misirlis](https://www.github.com/0xCoto/)**.
