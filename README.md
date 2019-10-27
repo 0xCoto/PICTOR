@@ -63,9 +63,10 @@ File | Description
 `plot.py` | Produces plots from observation data
 `plot_hi.py` | Produces HI-tailored plots (i.e. +calibrated spectrum) from observation data
 `id_history.txt` | Serves as an observation ID history database
-`pictor.grc` | [GRC](https://wiki.gnuradio.org/index.php/GNURadioCompanion) Flowgraph previously used for the recording and processing of the data
+`fft_integration.grc` | [GRC](https://wiki.gnuradio.org/index.php/GNURadioCompanion) Flowgraph previously used for the recording and processing of the data
+`top_block_old.py` | Embedded Python Block for `fft_integration.grc`
 `pfb.grc` | [GRC](https://wiki.gnuradio.org/index.php/GNURadioCompanion) Polyphase Filterbank Flowgraph for efficient data acquisition
-`top_block.py` | Embedded Python Block for `pictor.grc`
+`top_block.py` | Embedded Python Block for `pfb.grc`
 `observe.php` | Includes server-side PHP code for [/observe](https://www.pictortelescope.com/observe)
 `Waveguide.stl` | STL file for feedhorn visualization
 
