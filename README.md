@@ -30,6 +30,12 @@ PICTOR is a **fully open source** (software & hardware) project.
 ## PICTOR System Flowgraph
 ![alt text](https://i.imgur.com/AOdftxe.png "PICTOR flowgraph")
 
+## GRC Data Acquisition Flowgraph (old)
+![alt text](https://i.imgur.com/5R3f6Fx.png "Data Acquisition Flowgraph (old)")
+
+## GRC Data Acquisition Flowgraph ([Polyphase Filterbank (PFB)](https://arxiv.org/abs/1607.03579) - current)
+![alt text](https://i.imgur.com/2Xp8qnZ.png "Data Acquisition Flowgraph (current)")
+
 ## Feedhorn Dimensions
 ![alt text](https://i.imgur.com/557vUio.png "Feedhorn dimensions")
 
