@@ -205,13 +205,14 @@ function parseStatus(fileContents) {
     if (status == "true") {
         $("#currentlyOffline").hide();
         $("#currentlyInUseMessage").hide();
-        $(".contact100-form-btn").show();
+		$(".contact100-form-btn").show();
+		var online = true;
     }
     else if (status == "false") {
         $(".contact100-form-btn").hide();
         $("#currentlyInUseMessage").hide();
         $("#currentlyOffline").show();
-        return;
+		var online = false;
     }
 }
 function parseLastObservedFileAndUpdateUi(fileContents) {
@@ -253,7 +254,7 @@ if(isset($_REQUEST['submit_btn']))
     $obs_name = $_POST["obs_name"];
     $f_center= $_POST["f_center"];
     $bandwidth = $_POST["bandwidth"];
- 
+
     $channels = $_POST["channels"];
     $nbins = $_POST["nbins"];
     $duration = $_POST["duration"];
@@ -270,7 +271,7 @@ if(isset($_REQUEST['submit_btn']))
     fwrite($writeObs, "duration="."'".$duration."'"."\n");
     fwrite($writeObs, "id="."'"."0"."'"."\n");
     fwrite($writeObs, "obs_time="."'". $time."'"."\n");
-	fclose($writeObs);	
+	fclose($writeObs);
 
 
     $myfile = fopen("last_obs.txt", "w") or die("Unable to open file!");
@@ -284,7 +285,7 @@ if(isset($_REQUEST['submit_btn']))
     fwrite($myfile, "id="."'".$check."'"."\n");
     fwrite($myfile, "obs_time="."'". $time."'"."\n");
 
-	
+
 
 
 
