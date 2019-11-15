@@ -222,7 +222,7 @@ function parseLastObservedFileAndUpdateUi(fileContents) {
     var durationLine = lines[5];
     var durationInSeconds = parseInt(durationLine.split("=")[1].replace("'", ""));
 
-    var startTimeLine = lines[8];
+    var startTimeLine = lines[7];
     var startTimeInSeconds = parseInt(startTimeLine.split("=")[1].replace("'", ""));
 
     var currentTimeUnix = Math.round((new Date()).getTime() / 1000);
