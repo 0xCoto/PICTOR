@@ -206,13 +206,13 @@ function parseStatus(fileContents) {
         $("#currentlyOffline").hide();
         $("#currentlyInUseMessage").hide();
 		$(".contact100-form-btn").show();
-		var online = true;
+		online = true;
     }
     else if (status == "false") {
         $(".contact100-form-btn").hide();
         $("#currentlyInUseMessage").hide();
         $("#currentlyOffline").show();
-		var online = false;
+		online = false;
     }
 }
 function parseLastObservedFileAndUpdateUi(fileContents) {
