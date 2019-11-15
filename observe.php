@@ -187,8 +187,11 @@ fclose($statusFile);
 
 
 $(function() {
-    getLastObservedFile(parseLastObservedFileAndUpdateUi);
-    getStatusFile(parseStatus);
+	getStatusFile(function(fileContents)
+	{
+		parseStatus(fileContents);
+		getLastObservedFile(parseLastObservedFileAndUpdateUi);
+	});
 });
 
 function getLastObservedFile(callback)
@@ -228,8 +231,11 @@ function parseLastObservedFileAndUpdateUi(fileContents) {
     var currentTimeUnix = Math.round((new Date()).getTime() / 1000);
     var timeToWait = startTimeInSeconds - currentTimeUnix + durationInSeconds;
 
-    $(".contact100-form-btn").hide();
-    $("#currentlyInUseMessage").show();
+	if (online)
+	{
+		$(".contact100-form-btn").hide();
+		$("#currentlyInUseMessage").show();
+	}
 
     setTimeout(
         function()
