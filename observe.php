@@ -123,12 +123,14 @@ fclose($statusFile);
                         Submit
 					</button>
 				</div>
+                <center>
 				<div id="currentlyInUseMessage" style="display:none; color: orangered">
 					The telescope is currently observing. Please wait until it's done before submitting your observation!
 				</div>
                 <div id="currentlyOffline" style="display:none; color: red">
                     The telescope is currently under maintenance. Please check back in a few hours!
                 </div>
+                </center>
 				<hr>
 				<b>PICTOR</b>, located in <b>Athens, Greece</b>, is a free-to-use open source radio telescope that allows anyone to make continuous and spectral drift-scan observations of the radio sky in the <b>1300~1700 MHz</b> regime.
 
