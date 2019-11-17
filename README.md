@@ -1,4 +1,4 @@
-# PICTOR
+# PICTOR: A free-to-use Radio Telescope
 PICTOR is an open-source radio telescope that allows anyone to observe the radio sky, using its convenient web platform for free: https://www.pictortelescope.com
 
 ![alt text](https://i.imgur.com/u7b7s5h.jpg "The PICTOR Radio Telescope")
@@ -51,7 +51,7 @@ Measured with the **Keysight N5221A PNA Network Analyzer (10 MHz~13.5 GHz)**:
 ![alt text](https://i.imgur.com/f2LOvkE.jpg "Measurement of the feedhorn at the lab")
 
 ## Example Observation
-![alt text](https://i.imgur.com/XbxHLbW.png "Example Observation")
+![alt text](https://i.imgur.com/FadYhuG.png "Example Observation")
 
 ## Wish to observe with PICTOR?
 Take a look at the [PDF guide](https://www.pictortelescope.com/Observing_the_radio_sky_with_PICTOR.pdf) containing all the information you need to know in order to conduct your first observation of the radio sky!
