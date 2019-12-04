@@ -54,8 +54,7 @@ fclose($statusFile);
 					<hr>
 				<center><font color="1E90FF" size="4"><b>ⓘ New to radio astronomy?</b></font><font color="1E90FF" size="3"><br>Click <b><u><a href="Observing_the_radio_sky_with_PICTOR.pdf" target="_blank"><font color="7BB33A" size="3">here</font></a></u></b> to learn how to use <b>PICTOR</b> and observe the radio sky!<hr></font>
                     <?php
-                    $html_from_git = file_get_contents("https://raw.githubusercontent.com/0xCoto/PICTOR/master/position.html");
-                    print $html_from_git;
+                    print file_get_contents("https://raw.githubusercontent.com/0xCoto/PICTOR/master/position.html");
                     ?>
                 </center></span>
 
