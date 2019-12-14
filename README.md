@@ -11,6 +11,7 @@ The goal of this effort is to introduce students, educators, astronomers and oth
 PICTOR is a **fully open source** (software & hardware) project.
 
 ## Technical Details (Telescope Specifications)
+![alt text](https://i.imgur.com/C7XSO10.png "PICTOR Telescope Logo")
 **Telescope diameter:** 1.5m (4.92 ft = 59.05")  
 **Focal Ratio (F/D):** 0.411 (prime focus antenna)  
 **Beamwidth (HPBW @ 1420 MHz):** \~8.95° (*k* factor = 63.64)  
