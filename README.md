@@ -57,7 +57,7 @@ Measured with the **Keysight N5221A PNA Network Analyzer (10 MHz~13.5 GHz)**:
 Take a look at the [PDF guide](https://www.pictortelescope.com/Observing_the_radio_sky_with_PICTOR.pdf) containing all the information you need to know in order to conduct your first observation of the radio sky!
 
 <p align="center">
-  <img src="https://i.imgur.com/C7XSO10.png?raw=true" alt="PICTOR Telescope Logo"/>
+  <img src="https://i.imgur.com/qrkJkZw.png?raw=true" alt="PICTOR Telescope Logo"/>
 </p>
 
 ## A description/role for each file
