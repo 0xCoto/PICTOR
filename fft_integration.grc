@@ -1582,7 +1582,7 @@
     </param>
     <param>
       <key>file</key>
-      <value>/home/pictor/Desktop/pictortelescope/observation.dat</value>
+      <value>observation.dat</value>
     </param>
     <param>
       <key>_coordinate</key>
