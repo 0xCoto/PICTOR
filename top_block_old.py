@@ -46,7 +46,7 @@ class top_block(gr.top_block):
         self.blocks_stream_to_vector_0 = blocks.stream_to_vector(gr.sizeof_gr_complex*1, nchan)
         self.blocks_integrate_xx_0 = blocks.integrate_ff(nbin, nchan)
         self.blocks_head_0 = blocks.head(gr.sizeof_gr_complex*1, int(obs_time*samp_rate))
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*nchan, '/home/pictor/Desktop/pictortelescope/observation.dat', True)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*nchan, 'observation.dat', True)
         self.blocks_file_sink_0.set_unbuffered(False)
         self.blocks_complex_to_mag_squared_0 = blocks.complex_to_mag_squared(nchan)
         self.RTL820T = osmosdr.source( args="numchan=" + str(1) + " " + '' )
