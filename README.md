@@ -1,7 +1,10 @@
 # PICTOR: A free-to-use Radio Telescope
 PICTOR is an open-source radio telescope that allows anyone to observe the radio sky, using its convenient web platform for free: https://www.pictortelescope.com
 
+![alt text](https://i.imgur.com/Gnr6tar.jpg "The PICTOR Radio Telescope")
+
 ![alt text](https://i.imgur.com/u7b7s5h.jpg "The PICTOR Radio Telescope")
+
 
 ## About PICTOR
 PICTOR consists of a 1.5-meter parabolic antenna that allows anyone to make continuous and spectral (i.e. [hydrogen line](https://www.cv.nrao.edu/course/astr534/HILine.html)) drift-scan observations of the radio sky in the **1300~1700 MHz** regime for free. 
