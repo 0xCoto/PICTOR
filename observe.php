@@ -113,6 +113,11 @@ fclose($statusFile);
 
                 <span class="focus-input100"></span>
             </div>
+
+            <div class="wrap-input100">
+                <label class="label-input100" for="checkbox">Would you like to recieve your raw data?</label>
+                <input id="raw_data" type="checkbox" id="raw_data" name="raw_data" value="yes"/>
+            </div>
             <hr>
             Please enter an email address to get notified once the observation is complete.<p style="font-size:3px;">&emsp;</p>
             <div class="wrap-input100 validate-input" data-validate = "A valid email is required.">
@@ -248,6 +253,7 @@ fclose($statusFile);
 </script>
 </body>
 </html>
+
 <?php
 if(isset($_REQUEST['submit_btn']))
 {
@@ -263,6 +269,12 @@ if(isset($_REQUEST['submit_btn']))
     $email = $_POST["email"];
     $check = random_int(10000000, 99999999);
     $time = $date->getTimestamp();
+	if(isset($_POST["raw_data"]) && $_POST["raw_data"] == "yes"){
+		$data = 1;
+	}
+	else {
+		$data = 0;
+	}
     // Writing away
     $writeObs = fopen("last_obs_duration.txt", "w") or die("Unable to open file!");
     fwrite($writeObs, "obs_name="."'"."0"."'"."\n");
@@ -285,6 +297,7 @@ if(isset($_REQUEST['submit_btn']))
     fwrite($myfile, "email="."'".$email."'"."\n");
     fwrite($myfile, "id="."'".$check."'"."\n");
     fwrite($myfile, "obs_time="."'". $time."'"."\n");
+	fwrite($myfile, "raw_data="."'". $data."'"."\n");
     fclose($myfile);
 
     $message = "Your observation request has been successfully submitted! Once the observation is carried out, you will receive an email with the observation data.";
