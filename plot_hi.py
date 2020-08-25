@@ -4,6 +4,7 @@ try:
     matplotlib.use('Agg')
     
     import numpy as np
+    import pandas as pd
     import matplotlib.pyplot as plt
     import argparse
     from matplotlib.gridspec import GridSpec
@@ -103,6 +104,8 @@ try:
         gs = GridSpec(2,3,
                       height_ratios=[2, 1.5]
                       )
+        #Initialize frequency dataframe
+        data_freq = pd.DataFrame(freq, columns = ['frequency'])
         
         #Plot Averaged Spectrum
         ax1 = fig.add_subplot(gs[0,0])
@@ -116,6 +119,9 @@ try:
         ax1.set_title("Averaged Spectrum")
         #ax1.set_xticks(np.arange(np.min(freq),np.max(freq), step=0.3))
         ax1.grid()
+
+        #Add zmean to dataframe
+        data_freq['zmean'] = decibel(zmean)
         
         #Plot Calibrated Spectrum
         ax2 = fig.add_subplot(gs[0,1])
@@ -128,6 +134,9 @@ try:
         ax2.set_ylabel("Signal-to-Noise Ratio (S/N)")
         ax2.set_title("Calibrated Spectrum")
         ax2.grid()
+
+        #Add S/N to dataframe
+        data_freq['S/N'] = estimate_S_N_simple(spectrum, mask)
         
         #Plot Dynamic Spectrum (Waterfall)
         ax3 = fig.add_subplot(gs[0,2])
@@ -137,6 +146,10 @@ try:
         ax3.set_xlabel("Frequency (MHz)")
         ax3.set_ylabel("Time (s)")
         ax3.set_title("Dynamic Spectrum (Waterfall)")
+
+        #Create power vs time dataframe
+        data_time = pd.DataFrame(t, columns = ['time'])
+        data_time['w'] = w
         
         #Plot Power vs Time
         ax4 = fig.add_subplot(gs[1,:])
@@ -148,7 +161,11 @@ try:
         ax4.grid()
         
         plt.tight_layout()
+
+        #Save files
         plt.savefig("/home/pictor/Desktop/pictortelescope/plot.png")
+        data_freq.to_csv("home/pictor/Desktop/pictortelescope\data_freq.csv")
+        data_time.to_csv("home/pictor/Desktop/pictortelescope\data_time.csv")
 except Exception as e:
     print(e)
     pass
