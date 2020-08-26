@@ -172,7 +172,7 @@ try:
 
         #Save files
         plt.savefig("/home/pictor/Desktop/pictortelescope/plot.png")
-        np.savetxt("/home/pictor/Desktop/pictortelescope/data_freq_zmean_S_N.csv", data_freq_zmean_S_N, delimiter = ',', fmt = '%s')
+        np.savetxt("/home/pictor/Desktop/pictortelescope/data_freq_zmean.csv", data_freq_zmean_S_N, delimiter = ',', fmt = '%s')
         np.savetxt("/home/pictor/Desktop/pictortelescope/data_t_w.csv", data_t_w, delimiter = ',', fmt = '%s')
 except Exception as e:
     print(e)
