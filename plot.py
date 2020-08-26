@@ -4,7 +4,6 @@ try:
     matplotlib.use('Agg')
     
     import numpy as np
-    import pandas as pd
     import matplotlib.pyplot as plt
     import argparse
     from matplotlib.gridspec import GridSpec
@@ -52,8 +51,15 @@ try:
         fig = plt.figure(figsize=(20,15))
         gs = GridSpec(2,2)
 
-        #Initialize spectrum dataframe
-        data_freq = pd.DataFrame(freq, columns = ['frequency'])
+        #Create spectrum array
+        data_freq = ['freq:']
+        for i in range(len(freq)):
+            data_freq.append(freq[i])
+        data_zmean = ['zmean:']
+        for i in range(len(freq)):
+            data_zmean.append(zmean[i])
+
+        data_freq_zmean = np.array([data_freq, data_zmean])
         
         #Plot average spectrum
         ax1 = fig.add_subplot(gs[0,0])
@@ -63,9 +69,6 @@ try:
         ax1.set_xlabel("Frequency (MHz)")
         ax1.set_ylabel("Relative Power")
         ax1.set_title("Averaged Spectrum")
-
-        #Add zmean to dataframe
-        data_freq['zmean'] = decibel(zmean)
         
         #Plot dynamic spectrum
         ax2 = fig.add_subplot(gs[0,1])
@@ -78,8 +81,13 @@ try:
         ax2.set_title("Dynamic Spectrum (Waterfall)")
 
         #Create power vs time dataframe
-        data_time = pd.DataFrame(t, columns = ['time'])
-        data_time['w'] = w
+        data_t = ['time:']
+        for i in range(len(t)):
+            data_t.append(t[i])
+        data_w = ['w:']
+        for i in range(len(w)):
+            data_w.append(w[i])
+        data_t_w = np.array([data_t, data_w])
         
         #Plot Power vs Time
         ax3 = fig.add_subplot(gs[1,:])
@@ -92,8 +100,8 @@ try:
         
         #Save files
         plt.savefig("/home/pictor/Desktop/pictortelescope/plot.png")
-        data_freq.to_csv("/home/pictor/Desktop/pictortelescope/data_freq.csv")
-        data_time.to_csv("/home/pictor/Desktop/pictortelescope/data_time.csv")
+        np.savetxt("/home/pictor/Desktop/pictortelescope/data_freq_zmean.csv", data_freq_zmean, delimiter = ',', fmt = '%s')
+        np.savetxt("/home/pictor/Desktop/pictortelescope/data_t_w.csv", data_t_w, delimiter = ',', fmt = '%s')
 except Exception as e:
     print(e)
     pass
