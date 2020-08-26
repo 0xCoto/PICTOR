@@ -73,7 +73,7 @@ while True:
             copy2('/home/pictor/Desktop/pictortelescope/observation.dat', '/home/pictor/Desktop/pictortelescope/off1024.dat')
         elif obs_name == 'off2048':
             copy2('/home/pictor/Desktop/pictortelescope/observation.dat', '/home/pictor/Desktop/pictortelescope/off2048.dat')
-            
+        
         #Send plot to observer's email
         fromaddr = 'pictortelescope@gmail.com'
         toaddr = email
@@ -109,7 +109,7 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         msg.attach(p1)
         if (raw_data == '1'):
             #Add frequency vs. Power Data
-            filename2 = 'data_freq.csv'
+            filename2 = 'data_freq_zmean.csv'
             attachment2 = open("/home/pictor/Desktop/pictortelescope/"+filename2, 'rb')
 
             p2 = MIMEBase('application', 'octet-stream')
@@ -120,7 +120,7 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
             msg.attach(p2)
 
             #Add Time vs. Power Data
-            filename3 = 'data_time.csv'
+            filename3 = 'data_t_w.csv'
             attachment3 = open("/home/pictor/Desktop/pictortelescope/"+filename3, 'rb')
 
             p3 = MIMEBase('application', 'octet-stream')
@@ -186,7 +186,7 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         msg.attach(p1)
 
         #Add frequency vs. Power Data
-        filename2 = 'data_freq.csv'
+        filename2 = 'data_freq_zmean.csv'
         attachment2 = open("/home/pictor/Desktop/pictortelescope/"+filename2, 'rb')
 
         p2 = MIMEBase('application', 'octet-stream')
@@ -197,7 +197,7 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         msg.attach(p2)
 
         #Add Time vs. Power Data
-        filename3 = 'data_time.csv'
+        filename3 = 'data_t_w.csv'
         attachment3 = open("/home/pictor/Desktop/pictortelescope/"+filename3, 'rb')
 
         p3 = MIMEBase('application', 'octet-stream')
