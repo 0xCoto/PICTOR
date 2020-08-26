@@ -4,7 +4,6 @@ try:
     matplotlib.use('Agg')
     
     import numpy as np
-    import pandas as pd
     import matplotlib.pyplot as plt
     import argparse
     from matplotlib.gridspec import GridSpec
@@ -104,8 +103,18 @@ try:
         gs = GridSpec(2,3,
                       height_ratios=[2, 1.5]
                       )
-        #Initialize frequency dataframe
-        data_freq = pd.DataFrame(freq, columns = ['frequency'])
+        #Create frequency array
+        data_freq = ['freq:']
+        for i in range(len(freq)):
+            data_freq.append(freq[i])
+        data_zmean = ['zmean:']
+        for i in range(len(freq)):
+            data_zmean.append(zmean[i])
+        data_S_N = ['S/N:']
+        for i in range(len(freq)):
+            data_S_N.append(estimate_S_N_simple(spectrum,mask)[i])
+
+        data_freq_zmean_S_N = np.array([data_freq, data_zmean, data_S_N])
         
         #Plot Averaged Spectrum
         ax1 = fig.add_subplot(gs[0,0])
@@ -119,9 +128,6 @@ try:
         ax1.set_title("Averaged Spectrum")
         #ax1.set_xticks(np.arange(np.min(freq),np.max(freq), step=0.3))
         ax1.grid()
-
-        #Add zmean to dataframe
-        data_freq['zmean'] = decibel(zmean)
         
         #Plot Calibrated Spectrum
         ax2 = fig.add_subplot(gs[0,1])
@@ -134,9 +140,6 @@ try:
         ax2.set_ylabel("Signal-to-Noise Ratio (S/N)")
         ax2.set_title("Calibrated Spectrum")
         ax2.grid()
-
-        #Add S/N to dataframe
-        data_freq['S/N'] = estimate_S_N_simple(spectrum, mask)
         
         #Plot Dynamic Spectrum (Waterfall)
         ax3 = fig.add_subplot(gs[0,2])
@@ -147,9 +150,14 @@ try:
         ax3.set_ylabel("Time (s)")
         ax3.set_title("Dynamic Spectrum (Waterfall)")
 
-        #Create power vs time dataframe
-        data_time = pd.DataFrame(t, columns = ['time'])
-        data_time['w'] = w
+        #Create power vs time array
+        data_t = ['time:']
+        for i in range(len(t)):
+            data_t.append(t[i])
+        data_w = ['w:']
+        for i in range(len(w)):
+            data_w.append(w[i])
+        data_t_w = np.array([data_t, data_w])
         
         #Plot Power vs Time
         ax4 = fig.add_subplot(gs[1,:])
@@ -164,8 +172,8 @@ try:
 
         #Save files
         plt.savefig("/home/pictor/Desktop/pictortelescope/plot.png")
-        data_freq.to_csv("home/pictor/Desktop/pictortelescope\data_freq.csv")
-        data_time.to_csv("home/pictor/Desktop/pictortelescope\data_time.csv")
+        np.savetxt("/home/pictor/Desktop/pictortelescope/data_freq_zmean_S_N.csv", data_freq_zmean_S_N, delimiter = ',', fmt = '%s')
+        np.savetxt("/home/pictor/Desktop/pictortelescope/data_t_w.csv", data_t_w, delimiter = ',', fmt = '%s')
 except Exception as e:
     print(e)
     pass
