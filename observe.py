@@ -108,8 +108,8 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         p1.add_header('Content-Disposition', 'attachment; filename= %s' % filename1)
         msg.attach(p1)
         if (raw_data == '1'):
-            #Add frequency vs. Power Data
-            filename2 = 'data_freq_zmean.csv'
+            #Add spectrum Data
+            filename2 = 'data_spectrum.csv'
             attachment2 = open("/home/pictor/Desktop/pictortelescope/"+filename2, 'rb')
 
             p2 = MIMEBase('application', 'octet-stream')
@@ -120,7 +120,7 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
             msg.attach(p2)
 
             #Add Time vs. Power Data
-            filename3 = 'data_t_w.csv'
+            filename3 = 'data_time_power.csv'
             attachment3 = open("/home/pictor/Desktop/pictortelescope/"+filename3, 'rb')
 
             p3 = MIMEBase('application', 'octet-stream')
@@ -185,8 +185,8 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         p1.add_header('Content-Disposition', 'attachment; filename= %s' % filename)
         msg.attach(p1)
 
-        #Add frequency vs. Power Data
-        filename2 = 'data_freq_zmean.csv'
+        #Add spectrum Data
+        filename2 = 'data_spectrum.csv'
         attachment2 = open("/home/pictor/Desktop/pictortelescope/"+filename2, 'rb')
 
         p2 = MIMEBase('application', 'octet-stream')
@@ -197,7 +197,7 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         msg.attach(p2)
 
         #Add Time vs. Power Data
-        filename3 = 'data_t_w.csv'
+        filename3 = 'data_time_power.csv'
         attachment3 = open("/home/pictor/Desktop/pictortelescope/"+filename3, 'rb')
 
         p3 = MIMEBase('application', 'octet-stream')
