@@ -55,7 +55,7 @@ try:
         data_freq = ['freq:']
         for i in range(len(freq)):
             data_freq.append(freq[i])
-        data_zmean = ['zmean:']
+        data_zmean = ['average relative power by frequency:']
         for i in range(len(freq)):
             data_zmean.append(zmean[i])
 
@@ -84,7 +84,7 @@ try:
         data_t = ['time:']
         for i in range(len(t)):
             data_t.append(t[i])
-        data_w = ['w:']
+        data_w = ['relative power:']
         for i in range(len(w)):
             data_w.append(w[i])
         data_t_w = np.array([data_t, data_w])
@@ -100,8 +100,8 @@ try:
         
         #Save files
         plt.savefig("/home/pictor/Desktop/pictortelescope/plot.png")
-        np.savetxt("/home/pictor/Desktop/pictortelescope/data_freq_zmean.csv", data_freq_zmean, delimiter = ',', fmt = '%s')
-        np.savetxt("/home/pictor/Desktop/pictortelescope/data_t_w.csv", data_t_w, delimiter = ',', fmt = '%s')
+        np.savetxt("/home/pictor/Desktop/pictortelescope/data_spectrume.csv", data_freq_zmean, delimiter = ',', fmt = '%s')
+        np.savetxt("/home/pictor/Desktop/pictortelescope/data_time_power.csv", data_t_w, delimiter = ',', fmt = '%s')
 except Exception as e:
     print(e)
     pass
