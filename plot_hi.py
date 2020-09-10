@@ -53,11 +53,12 @@ try:
         exec(args.samp_rate)
         exec(args.nchan)
         exec(args.nbin)
-        obs_on = "/home/pictor/Desktop/pictortelescope/observation.dat"
-        obs_off = "/home/pictor/Desktop/pictortelescope/off"+str(nchan)+".dat"
+        obs_on = "/home/pi/Desktop/pictortelescope/observation.dat"
+        obs_off = "/home/pi/Desktop/pictortelescope/off"+str(nchan)+".dat"
         
         #Load ON data
         z = np.fromfile(obs_on, dtype="float32").reshape(-1, nchan)/nbin
+        z = np.delete(z, (0), axis=0)
         z = z*10000
         
         #RFI mitigation
@@ -148,7 +149,7 @@ try:
         ax4.grid()
         
         plt.tight_layout()
-        plt.savefig("/home/pictor/Desktop/pictortelescope/plot.png")
+        plt.savefig("/home/pi/Desktop/pictortelescope/plot.png")
 except Exception as e:
     print(e)
     pass
