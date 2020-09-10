@@ -15,7 +15,7 @@ while True:
         #Get observation parameters
         sleep(10)
         try:
-            response = requests.get('https://pictortelescope.com/last_obs.txt', auth=('pictor', 'XXX')) #plaintext credentials
+            response = requests.get('https://pictortelescope.com/last_obs.txt', auth=('XXX', 'XXX')) #plaintext credentials
             if response.status_code == 200:
                 exec(response.content)
                 if id not in open('/home/pi/Desktop/pictortelescope/id_history.txt').read() and 'notpictor' not in obs_name:
