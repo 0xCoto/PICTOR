@@ -54,7 +54,8 @@ fclose($statusFile);
 					<hr>
 				<center><font color="1E90FF" size="4"><b>ⓘ New to radio astronomy?</b></font><font color="1E90FF" size="3"><br>Click <b><u><a href="Observing_the_radio_sky_with_PICTOR.pdf" target="_blank"><font color="7BB33A" size="3">here</font></a></u></b> to learn how to use <b>PICTOR</b> and observe the radio sky!<hr></font>
                     <?php
-                    print file_get_contents("https://raw.githubusercontent.com/0xCoto/PICTOR/master/position.html");
+                    $html_from_git = file_get_contents("https://raw.githubusercontent.com/0xCoto/PICTOR/master/position.html");
+                    print $html_from_git;
                     ?>
                 </center></span>
 
@@ -103,7 +104,7 @@ fclose($statusFile);
 
             <div class="wrap-input100 validate-input" data-validate="Number of bins is required">
                 <label class="label-input100" for="nbins">Number of bins</label>
-                <input id="nbins" class="input100" type="number" name="nbins" min="1000" max="20000" placeholder="Enter the number of bins..." value="1000" required="">
+                <input id="nbins" class="input100" type="number" name="nbins" min="100" max="20000" placeholder="Enter the number of bins..." value="100" required="">
                 <span class="focus-input100"></span>
             </div>
 
@@ -121,11 +122,9 @@ fclose($statusFile);
                 <span class="focus-input100"></span>
             </div>
 
+
             <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn"  name="submit_btn">
-                    Submit
-                </button>
-            </div>
+            <button class='contact100-form-btn' name='submit_btn'>Submit</button></div>
             <div id="currentlyInUseMessage" style="display:none; color: orangered">
                 The telescope is currently observing. Please wait until it's done before submitting your observation!
             </div>
@@ -133,19 +132,21 @@ fclose($statusFile);
                 The telescope is currently under maintenance. Please check back in a few hours!
             </div>
 
-            <hr><font color="#ff6348" size="3"><b>🚀 <font color="#e84118" size="3"><u>NEW</u>:</font></b> You can now <u><a href="https://community.pictortelescope.com" target="_blank"><font color="#05c46b" size="3"><b>join the PICTOR Community</b></font></a></u> and share your observations with others!</font><hr>
-            <b>PICTOR</b>, located in <b>Athens, Greece</b>, is a free-to-use open source radio telescope that allows anyone to make continuous and spectral drift-scan observations of the radio sky in the <b>1300~1700 MHz</b> regime.
+           <!-- <hr><font color="#ff6348" size="3"><b>🚀 <font color="#e84118" size="3"><u>NEW</u>:</font></b> You can now <u><a href="https://community.pictortelescope.com" target="_blank"><font color="#05c46b" size="3"><b>join the PICTOR Community</b></font></a></u> and share your observations with others!</font>
+-->
+<hr>
+            <b>PICTOR</b>, located in <b>Agrinio, Greece</b>, is a free-to-use open source radio telescope that allows anyone to make continuous and spectral drift-scan observations of the radio sky in the <b>1300~1700 MHz</b>  regime. Special thanks to Konstantinos Bakolitsas for providing his dish.
 
             <br><br>
             <p style="font-size:95%;">Contact: <a style="font-size:95%;" href="mailto:0xcoto@protonmail.com">0xcoto@protonmail.com</a></p>
             <p style="font-size:95%;">GitHub: <a style="font-size:95%;" href="https://github.com/0xCoto/PICTOR" target="_blank">https://github.com/0xCoto/PICTOR</a></p>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.		
         </form>
 
         <div class="contact100-more flex-col-c-m" style="background-image: url('images/bg-01.jpg');">
         </div>
     </div>
 </div>
-
 
 
 
@@ -206,14 +207,14 @@ fclose($statusFile);
     function parseStatus(fileContents) {
         var status = fileContents
 
-        if (status == "true") {
-            $("#currentlyOffline").hide();
+        if (1==1) {
+           $("#currentlyOffline").hide();
             $("#currentlyInUseMessage").hide();
             $(".contact100-form-btn").show();
             online = true;
         }
         else if (status == "false") {
-            $(".contact100-form-btn").hide();
+           // $(".contact100-form-btn").hide();
             $("#currentlyInUseMessage").hide();
             $("#currentlyOffline").show();
             online = false;
@@ -232,7 +233,7 @@ fclose($statusFile);
         var currentTimeUnix = Math.round((new Date()).getTime() / 1000);
         var timeToWait = startTimeInSeconds - currentTimeUnix + durationInSeconds;
 
-        $(".contact100-form-btn").hide();
+      //  $(".contact100-form-btn").hide();
         $("#currentlyInUseMessage").show();
 
         setTimeout(
@@ -251,6 +252,8 @@ fclose($statusFile);
 <?php
 if(isset($_REQUEST['submit_btn']))
 {
+
+
     // getting all the value's
     $date = new DateTime();
     $obs_name = $_POST["obs_name"];
@@ -274,7 +277,8 @@ if(isset($_REQUEST['submit_btn']))
     fwrite($writeObs, "id="."'"."0"."'"."\n");
     fwrite($writeObs, "obs_time="."'". $time."'"."\n");
     fclose($writeObs);
-    
+
+
     $myfile = fopen("last_obs.txt", "w") or die("Unable to open file!");
     fwrite($myfile, "obs_name="."'".$obs_name."'"."\n");
     fwrite($myfile, "f_center="."'".$f_center."'"."\n");
@@ -285,6 +289,13 @@ if(isset($_REQUEST['submit_btn']))
     fwrite($myfile, "email="."'".$email."'"."\n");
     fwrite($myfile, "id="."'".$check."'"."\n");
     fwrite($myfile, "obs_time="."'". $time."'"."\n");
+
+
+
+
+
+
+
     fclose($myfile);
 
     $message = "Your observation request has been successfully submitted! Once the observation is carried out, you will receive an email with the observation data.";
