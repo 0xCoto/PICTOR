@@ -25,11 +25,14 @@ try:
         exec(args.samp_rate)
         exec(args.nchan)
         exec(args.nbin)
-        fname = "/home/pictor/Desktop/pictortelescope/observation.dat"
+        fname = "/home/pi/Desktop/pictortelescope/observation.dat"
         
         #Load data
         z = np.fromfile(fname, dtype="float32").reshape(-1, nchan)/nbin
+        #z = np.delete(z, (0), axis=0)
+        #z = z[n:, :]
         z = z*10000
+        z = np.delete(z, (0), axis=0)
         
         #Define numpy array for Power vs Time plot
         w = np.mean(a=z, axis=1)
@@ -78,7 +81,7 @@ try:
         ax3.set_title("Power vs Time")
         
         plt.tight_layout()
-        plt.savefig("/home/pictor/Desktop/pictortelescope/plot.png")
+        plt.savefig("/home/pi/Desktop/pictortelescope/plot.png")
 except Exception as e:
     print(e)
     pass
