@@ -25,11 +25,14 @@ try:
         exec(args.samp_rate)
         exec(args.nchan)
         exec(args.nbin)
-        fname = "/home/pictor/Desktop/pictortelescope/observation.dat"
+        fname = "/home/pi/Desktop/pictortelescope/observation.dat"
         
         #Load data
         z = np.fromfile(fname, dtype="float32").reshape(-1, nchan)/nbin
+        #z = np.delete(z, (0), axis=0)
+        #z = z[n:, :]
         z = z*10000
+        z = np.delete(z, (0), axis=0)
         
         #Define numpy array for Power vs Time plot
         w = np.mean(a=z, axis=1)
@@ -99,9 +102,9 @@ try:
         plt.tight_layout()
         
         #Save files
-        plt.savefig("/home/pictor/Desktop/pictortelescope/plot.png")
-        np.savetxt("/home/pictor/Desktop/pictortelescope/data_spectrume.csv", data_freq_zmean, delimiter = ',', fmt = '%s')
-        np.savetxt("/home/pictor/Desktop/pictortelescope/data_time_power.csv", data_t_w, delimiter = ',', fmt = '%s')
+        plt.savefig("/home/pi/Desktop/pictortelescope/plot.png")
+        np.savetxt("/home/pi/Desktop/pictortelescope/data_spectrum.csv", data_freq_zmean, delimiter = ',', fmt = '%s')
+        np.savetxt("/home/pi/Desktop/pictortelescope/data_time_power.csv", data_t_w, delimiter = ',', fmt = '%s')
 except Exception as e:
     print(e)
     pass
