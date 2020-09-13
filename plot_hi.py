@@ -53,11 +53,12 @@ try:
         exec(args.samp_rate)
         exec(args.nchan)
         exec(args.nbin)
-        obs_on = "/home/pictor/Desktop/pictortelescope/observation.dat"
-        obs_off = "/home/pictor/Desktop/pictortelescope/off"+str(nchan)+".dat"
+        obs_on = "/home/pi/Desktop/pictortelescope/observation.dat"
+        obs_off = "/home/pi/Desktop/pictortelescope/off"+str(nchan)+".dat"
         
         #Load ON data
         z = np.fromfile(obs_on, dtype="float32").reshape(-1, nchan)/nbin
+        z = np.delete(z, (0), axis=0)
         z = z*10000
         
         #RFI mitigation
@@ -171,9 +172,9 @@ try:
         plt.tight_layout()
 
         #Save files
-        plt.savefig("/home/pictor/Desktop/pictortelescope/plot.png")
-        np.savetxt("/home/pictor/Desktop/pictortelescope/data_spectrum.csv", data_freq_zmean_S_N, delimiter = ',', fmt = '%s')
-        np.savetxt("/home/pictor/Desktop/pictortelescope/data_time_power.csv", data_t_w, delimiter = ',', fmt = '%s')
+        plt.savefig("/home/pi/Desktop/pictortelescope/plot.png")
+        np.savetxt("/home/pi/Desktop/pictortelescope/data_spectrum.csv", data_freq_zmean_S_N, delimiter = ',', fmt = '%s')
+        np.savetxt("/home/pi/Desktop/pictortelescope/data_time_power.csv", data_t_w, delimiter = ',', fmt = '%s')
 except Exception as e:
     print(e)
     pass
