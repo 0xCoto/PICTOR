@@ -1,4 +1,4 @@
-<?php
+<?php 
 $pictorIsDown = false;
 foreach (json_decode(file_get_contents("https://discordapp.com/api/guilds/644685390116290560/widget.json"), true)['members'] as $user) {
     if ($user["username"] == 'PICTOR') {
@@ -114,6 +114,19 @@ fclose($statusFile);
 
                 <span class="focus-input100"></span>
             </div>
+
+            <div class="wrap-input100">
+                <div class="label-input100">Would you like to recieve your raw data as a .csv file?</div>
+                <div>
+                    <select class="js-select2" name="raw_data">
+                        <option value="0" selected="selected">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+                <span class="focus-input100"></span>
+            </div>
+
             <hr>
             Please enter an email address to get notified once the observation is complete.<p style="font-size:3px;">&emsp;</p>
             <div class="wrap-input100 validate-input" data-validate = "A valid email is required.">
@@ -121,7 +134,6 @@ fclose($statusFile);
                 <input id="email" class="input100" type="text" name="email" placeholder="Enter your email..." required>
                 <span class="focus-input100"></span>
             </div>
-
 
             <div class="container-contact100-form-btn">
             <button class='contact100-form-btn' name='submit_btn'>Submit</button></div>
@@ -132,7 +144,7 @@ fclose($statusFile);
                 The telescope is currently under maintenance. Please check back in a few hours!
             </div>
 
-           <!-- <hr><font color="#ff6348" size="3"><b>🚀 <font color="#e84118" size="3"><u>NEW</u>:</font></b> You can now <u><a href="https://community.pictortelescope.com" target="_blank"><font color="#05c46b" size="3"><b>join the PICTOR Community</b></font></a></u> and share your observations with others!</font>
+            <!-- <hr><font color="#ff6348" size="3"><b>🚀 <font color="#e84118" size="3"><u>NEW</u>:</font></b> You can now <u><a href="https://community.pictortelescope.com" target="_blank"><font color="#05c46b" size="3"><b>join the PICTOR Community</b></font></a></u> and share your observations with others!</font>
 -->
 <hr>
             <b>PICTOR</b>, located in <b>Agrinio, Greece</b>, is a free-to-use open source radio telescope that allows anyone to make continuous and spectral drift-scan observations of the radio sky in the <b>1300~1700 MHz</b>  regime. Special thanks to Konstantinos Bakolitsas for providing his dish.
@@ -140,13 +152,14 @@ fclose($statusFile);
             <br><br>
             <p style="font-size:95%;">Contact: <a style="font-size:95%;" href="mailto:0xcoto@protonmail.com">0xcoto@protonmail.com</a></p>
             <p style="font-size:95%;">GitHub: <a style="font-size:95%;" href="https://github.com/0xCoto/PICTOR" target="_blank">https://github.com/0xCoto/PICTOR</a></p>
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.		
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
         </form>
 
         <div class="contact100-more flex-col-c-m" style="background-image: url('images/bg-01.jpg');">
         </div>
     </div>
 </div>
+
 
 
 
@@ -208,13 +221,13 @@ fclose($statusFile);
         var status = fileContents
 
         if (1==1) {
-           $("#currentlyOffline").hide();
+            $("#currentlyOffline").hide();
             $("#currentlyInUseMessage").hide();
             $(".contact100-form-btn").show();
             online = true;
         }
         else if (status == "false") {
-           // $(".contact100-form-btn").hide();
+            //$(".contact100-form-btn").hide();
             $("#currentlyInUseMessage").hide();
             $("#currentlyOffline").show();
             online = false;
@@ -233,7 +246,7 @@ fclose($statusFile);
         var currentTimeUnix = Math.round((new Date()).getTime() / 1000);
         var timeToWait = startTimeInSeconds - currentTimeUnix + durationInSeconds;
 
-      //  $(".contact100-form-btn").hide();
+        //$(".contact100-form-btn").hide();
         $("#currentlyInUseMessage").show();
 
         setTimeout(
@@ -249,11 +262,10 @@ fclose($statusFile);
 </script>
 </body>
 </html>
+
 <?php
 if(isset($_REQUEST['submit_btn']))
 {
-
-
     // getting all the value's
     $date = new DateTime();
     $obs_name = $_POST["obs_name"];
@@ -266,6 +278,12 @@ if(isset($_REQUEST['submit_btn']))
     $email = $_POST["email"];
     $check = random_int(10000000, 99999999);
     $time = $date->getTimestamp();
+	if(isset($_POST["raw_data"]) && $_POST["raw_data"] == "1"){
+		$data = 1;
+	}
+	else {
+		$data = 0;
+	}
     // Writing away
     $writeObs = fopen("last_obs_duration.txt", "w") or die("Unable to open file!");
     fwrite($writeObs, "obs_name="."'"."0"."'"."\n");
@@ -277,8 +295,7 @@ if(isset($_REQUEST['submit_btn']))
     fwrite($writeObs, "id="."'"."0"."'"."\n");
     fwrite($writeObs, "obs_time="."'". $time."'"."\n");
     fclose($writeObs);
-
-
+    
     $myfile = fopen("last_obs.txt", "w") or die("Unable to open file!");
     fwrite($myfile, "obs_name="."'".$obs_name."'"."\n");
     fwrite($myfile, "f_center="."'".$f_center."'"."\n");
@@ -289,13 +306,7 @@ if(isset($_REQUEST['submit_btn']))
     fwrite($myfile, "email="."'".$email."'"."\n");
     fwrite($myfile, "id="."'".$check."'"."\n");
     fwrite($myfile, "obs_time="."'". $time."'"."\n");
-
-
-
-
-
-
-
+	fwrite($myfile, "raw_data="."'". $data."'"."\n");
     fclose($myfile);
 
     $message = "Your observation request has been successfully submitted! Once the observation is carried out, you will receive an email with the observation data.";

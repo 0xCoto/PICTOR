@@ -104,6 +104,18 @@ try:
         gs = GridSpec(2,3,
                       height_ratios=[2, 1.5]
                       )
+        #Create frequency array
+        data_freq = ['freq:']
+        for i in range(len(freq)):
+            data_freq.append(freq[i])
+        data_zmean = ['average relative power by frequency:']
+        for i in range(len(freq)):
+            data_zmean.append(zmean[i])
+        data_S_N = ['signal/noise:']
+        for i in range(len(freq)):
+            data_S_N.append(estimate_S_N_simple(spectrum,mask)[i])
+
+        data_freq_zmean_S_N = np.array([data_freq, data_zmean, data_S_N])
         
         #Plot Averaged Spectrum
         ax1 = fig.add_subplot(gs[0,0])
@@ -138,6 +150,15 @@ try:
         ax3.set_xlabel("Frequency (MHz)")
         ax3.set_ylabel("Time (s)")
         ax3.set_title("Dynamic Spectrum (Waterfall)")
+
+        #Create power vs time array
+        data_t = ['time:']
+        for i in range(len(t)):
+            data_t.append(t[i])
+        data_w = ['relative power:']
+        for i in range(len(w)):
+            data_w.append(w[i])
+        data_t_w = np.array([data_t, data_w])
         
         #Plot Power vs Time
         ax4 = fig.add_subplot(gs[1,:])
@@ -149,7 +170,11 @@ try:
         ax4.grid()
         
         plt.tight_layout()
+
+        #Save files
         plt.savefig("/home/pi/Desktop/pictortelescope/plot.png")
+        np.savetxt("/home/pi/Desktop/pictortelescope/data_spectrum.csv", data_freq_zmean_S_N, delimiter = ',', fmt = '%s')
+        np.savetxt("/home/pi/Desktop/pictortelescope/data_time_power.csv", data_t_w, delimiter = ',', fmt = '%s')
 except Exception as e:
     print(e)
     pass

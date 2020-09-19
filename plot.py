@@ -53,6 +53,16 @@ try:
         #Initialize plot
         fig = plt.figure(figsize=(20,15))
         gs = GridSpec(2,2)
+
+        #Create spectrum array
+        data_freq = ['freq:']
+        for i in range(len(freq)):
+            data_freq.append(freq[i])
+        data_zmean = ['average relative power by frequency:']
+        for i in range(len(freq)):
+            data_zmean.append(zmean[i])
+
+        data_freq_zmean = np.array([data_freq, data_zmean])
         
         #Plot average spectrum
         ax1 = fig.add_subplot(gs[0,0])
@@ -72,6 +82,15 @@ try:
         ax2.set_ylabel("Time (s)")
         
         ax2.set_title("Dynamic Spectrum (Waterfall)")
+
+        #Create power vs time dataframe
+        data_t = ['time:']
+        for i in range(len(t)):
+            data_t.append(t[i])
+        data_w = ['relative power:']
+        for i in range(len(w)):
+            data_w.append(w[i])
+        data_t_w = np.array([data_t, data_w])
         
         #Plot Power vs Time
         ax3 = fig.add_subplot(gs[1,:])
@@ -81,7 +100,11 @@ try:
         ax3.set_title("Power vs Time")
         
         plt.tight_layout()
+        
+        #Save files
         plt.savefig("/home/pi/Desktop/pictortelescope/plot.png")
+        np.savetxt("/home/pi/Desktop/pictortelescope/data_spectrum.csv", data_freq_zmean, delimiter = ',', fmt = '%s')
+        np.savetxt("/home/pi/Desktop/pictortelescope/data_time_power.csv", data_t_w, delimiter = ',', fmt = '%s')
 except Exception as e:
     print(e)
     pass
