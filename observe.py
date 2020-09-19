@@ -132,15 +132,15 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
             msg.attach(p3)
 
             #Add .dat data
-            filename4 = 'observation.dat'
-            attachment4 = open("/home/pi/Desktop/pictortelescope/"+filename4, 'rb')
+            #filename4 = 'observation.dat'
+            #attachment4 = open("/home/pi/Desktop/pictortelescope/"+filename4, 'rb')
 
-            p4 = MIMEBase('application', 'octet-stream')
-            p4.set_payload((attachment4).read())
+            #p4 = MIMEBase('application', 'octet-stream')
+            #p4.set_payload((attachment4).read())
 
-            encoders.encode_base64(p4)
-            p4.add_header('Content-Disposition', 'attachment; filename= %s' % filename4)
-            msg.attach(p4)
+            #encoders.encode_base64(p4)
+            #p4.add_header('Content-Disposition', 'attachment; filename= %s' % filename4)
+            #msg.attach(p4)
             
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
