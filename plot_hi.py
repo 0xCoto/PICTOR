@@ -4,6 +4,7 @@ try:
     matplotlib.use('Agg')
     
     import numpy as np
+    import pandas as pd
     import matplotlib.pyplot as plt
     import argparse
     from matplotlib.gridspec import GridSpec
@@ -175,6 +176,15 @@ try:
         plt.savefig("/home/pi/Desktop/pictortelescope/plot.png")
         np.savetxt("/home/pi/Desktop/pictortelescope/data_spectrum.csv", data_freq_zmean_S_N, delimiter = ',', fmt = '%s')
         np.savetxt("/home/pi/Desktop/pictortelescope/data_time_power.csv", data_t_w, delimiter = ',', fmt = '%s')
+        
+        #Transpose saved files (switch columns and rows)
+        df_spectrum = pd.read_csv("data_spectrum.csv", header=None)
+        df_time_power = pd.read_csv("data_time_power.csv", header=None)
+        df_spectrum_tr = df_spectrum.transpose()
+        df_time_power_tr = df_time_power.transpose()
+        df_spectrum_tr.to_csv("data_spectrum_transposed.csv", header=False, index=False)
+        df_time_power_tr.to_csv("data_time_power_transposed.csv", header=False, index=False)
+
 except Exception as e:
     print(e)
     pass
