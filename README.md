@@ -36,7 +36,7 @@ PICTOR is a **fully open source** (software & hardware) project.
 ## GRC Data Acquisition Flowgraph (old)
 ![alt text](https://i.imgur.com/5R3f6Fx.png "Data Acquisition Flowgraph (old)")
 
-## GRC Data Acquisition Flowgraph ([Polyphase Filterbank (PFB)](https://arxiv.org/abs/1607.03579))
+## GRC Data Acquisition Flowgraph (4-tap weighted overlap-add (WOLA) Fourier transform spectrometer)
 ![alt text](https://i.imgur.com/2Xp8qnZ.png "Data Acquisition Flowgraph")
 
 ## Feedhorn Dimensions
