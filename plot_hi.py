@@ -173,8 +173,8 @@ try:
 
         #Save files
         plt.savefig("/home/pi/Desktop/pictortelescope/plot.png")
-        np.savetxt("/home/pi/Desktop/pictortelescope/data_spectrum.csv", data_freq_zmean_S_N, delimiter = ',', fmt = '%s')
-        np.savetxt("/home/pi/Desktop/pictortelescope/data_time_power.csv", data_t_w, delimiter = ',', fmt = '%s')
+        np.savetxt("/home/pi/Desktop/pictortelescope/data_spectrum.csv", np.transpose(data_freq_zmean_S_N), delimiter = ',', fmt = '%s')
+        np.savetxt("/home/pi/Desktop/pictortelescope/data_time_power.csv", np.transpose(data_t_w), delimiter = ',', fmt = '%s')
 except Exception as e:
     print(e)
     pass
