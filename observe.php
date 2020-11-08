@@ -110,7 +110,7 @@ fclose($statusFile);
 
             <div class="wrap-input100 validate-input" data-validate="Observing duration is required">
                 <label class="label-input100" for="f_center">Duration (sec)</label>
-                <input id="duration" class="input100" type="number" name="duration" min="10" max="3600" placeholder="Enter the duration of your observation..." required="">
+                <input id="duration" class="input100" type="number" name="duration" min="10" max="600" placeholder="Enter the duration of your observation..." required="">
 
                 <span class="focus-input100"></span>
             </div>
