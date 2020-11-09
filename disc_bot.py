@@ -4,12 +4,31 @@ import requests
 import os
 import discord
 import time
+import virgo
+import numpy as np
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+plt.rcParams["figure.figsize"] = (20,20)
+test = np.loadtxt('/home/pi/Desktop/pictortelescope/map.txt')
+brr = np.flip(test, 1)
+a = plt.imshow(brr, extent=[24,0,-90,90], aspect=0.07, interpolation = 'none')
+plt.xticks(np.arange(0, 24.01, 2))
+plt.text(4.75, 91.8, 'LAB HI Survey (Kalberla et al., 2005)', fontsize=14, bbox={'facecolor': 'white', 'pad': 4})
+plt.title('PICTOR Telescope | All-Sky Map', fontsize=28, y=1.01)
+plt.xlabel('Right Ascension (hours)', fontsize=20)
+plt.ylabel('Declination (deg)', fontsize=20)
+plt.xticks(fontsize=16)
+plt.yticks(fontsize=16)
+#hpbw = 70*(0.21/3.2)
+
 
 #time.sleep(20)
 while True:
     if True:
         #load_dotenv()
-        token = 'XXX'
+        token = 'xxx'
         client = discord.Client()
         
         @client.event
@@ -37,16 +56,34 @@ while True:
             if 'restart_pictor' in message.content:
                 os.system("sudo /bin/systemctl restart pictor.service")
                 os.system("sudo /bin/systemctl restart disc_bot.service")
-            if '639462705723605013>' in message.content and observing and 'observe' in message.content:
+            flag = True
+            if ((message.content).startswith('<@!639462') or (message.content).startswith('<@639462') or ((message.content).lower()).startswith('@pictor')) and '639462705723605013>' in message.content and observing and 'observe' in (message.content).lower():
                 await message.add_reaction('❌')
                 await message.channel.send('The telescope is currently observing. Please wait until it\'s done before submitting your observation...')
                 return
-            elif '639462705723605013>' in message.content and observing:
+            elif ((message.content).startswith('<@!639462') or (message.content).startswith('<@639462') or ((message.content).lower()).startswith('@pictor')) and '639462705723605013>' in message.content and observing and 'map' not in (message.content).lower():
                 print(3)
                 await message.channel.send('**PICTOR** is an open-source radio telescope that allows anyone to observe the radio sky using its convenient web platform for **free**! This bot allows you to submit observations directly from Discord. For more info, visit <https://www.pictortelescope.com> or ping <@!234246004424179712> for help!\n\n**Usage:**\n```@PICTOR observe <duration (in seconds)>```\n**Example:**\n```@PICTOR observe 60```\n**Default observation parameters:**\n```\nCenter frequency: 1420 MHz\nBandwidth: 2.4 MHz\nNumber of channels: 2048\nNumber of bins: 100```')
                 return
+            elif ((message.content).startswith('<@!639462') or (message.content).startswith('<@639462') or ((message.content).lower()).startswith('@pictor')) and '639462705723605013>' in message.content and 'map' in (message.content).lower():
+                await message.add_reaction('🌌')
+                ra, dec = virgo.equatorial(88, 0, 38.6245, 21.4096)
+                if flag:
+                    v = plt.axvline(ra, 0, 1, linestyle='--', linewidth=2, color=(214/255, 39/255, 40/255, 0.9))
+                    h = plt.axhline(dec, 0, 1, linestyle='--', linewidth=2, color=(214/255, 39/255, 40/255, 0.9))
+                else:
+                    v.set_ydata(ra)
+                    h.set_ydata(dec)
+                flag = False
+                #plt.axhline(dec-float(hpbw)/2, 0, 1, linestyle='--', linewidth=2, color=(214/255, 39/255, 40/255, 0.9))
+                #plt.axhline(dec+float(hpbw)/2, 0, 1, linestyle='--', linewidth=2, color=(214/255, 39/255, 40/255, 0.9))
+                plt.scatter(ra, dec, s=350, color=[214/255, 39/255, 40/255])
+                plt.tight_layout()
+                plt.savefig('/home/pi/Desktop/pictortelescope/map.png', bbox_inches='tight')
+                await message.channel.send('<@!'+str(message.author.id)+ '> The telescope is currently pointing to **RA = '+str(round(ra,1))+' h**, **Dec. = '+str(round(dec,1))+'°** (**𝑙 = '+str(round(virgo.galactic(ra,dec)[0],1))+'°**, **𝑏 = '+str(round(virgo.galactic(ra,dec)[1],1))+'°**):', file=discord.File('/home/pi/Desktop/pictortelescope/map.png'))
+                return
             print(2)
-            if not observing and '639462705723605013>' in message.content and len(message.content.split()) == 3 and message.content.split()[1].lower() == 'observe':
+            if not observing and ((message.content).startswith('<@!639462') or (message.content).startswith('<@639462') or ((message.content).lower()).startswith('@pictor')) and '639462705723605013>' in message.content and len(message.content.split()) == 3 and (((message.content).split())[1]).lower() == 'observe':
                 if  message.content.split()[2].isdigit() and int(message.content.split()[2]) >= 10 and int(message.content.split()[2]) <= 600:
                     duration = message.content.split()[2]
                     try:
@@ -82,8 +119,19 @@ while True:
                     await message.add_reaction('❌')
                     await message.channel.send('Please ensure the given observation duration is greater than 10 and less than 600 seconds.')
             
-            elif '639462705723605013>' in message.content:
+            elif ((message.content).startswith('<@!639462') or (message.content).startswith('<@639462') or ((message.content).lower()).startswith('@pictor')) and '639462705723605013>' in message.content and 'map' not in (message.content).lower():
                 await message.channel.send('**PICTOR** is an open-source radio telescope that allows anyone to observe the radio sky using its convenient web platform for **free**! This bot allows you to submit observations directly from Discord. For more info, visit <https://www.pictortelescope.com> or ping <@!234246004424179712> for help!\n\n**Usage:**\n```@PICTOR observe <duration (in seconds)>```\n**Example:**\n```@PICTOR observe 60```\n**Default observation parameters:**\n```\nCenter frequency: 1420 MHz\nBandwidth: 2.4 MHz\nNumber of channels: 2048\nNumber of bins: 100```')
+            elif ((message.content).startswith('<@!639462') or (message.content).startswith('<@639462') or ((message.content).lower()).startswith('@pictor')) and '639462705723605013>' in message.content and 'map' in (message.content).lower():
+                await message.add_reaction('🌌')
+                ra, dec = virgo.equatorial(88, 0, 38.6245, 21.4096)
+                plt.axvline(ra, 0, 1, linestyle='--', linewidth=2, color=(214/255, 39/255, 40/255, 0.9))
+                plt.axhline(dec, 0, 1, linestyle='--', linewidth=2, color=(214/255, 39/255, 40/255, 0.9))
+                #plt.axhline(dec-float(hpbw)/2, 0, 1, linestyle='--', linewidth=2, color=(214/255, 39/255, 40/255, 0.9))
+                #plt.axhline(dec+float(hpbw)/2, 0, 1, linestyle='--', linewidth=2, color=(214/255, 39/255, 40/255, 0.9))
+                plt.scatter(ra, dec, s=350, color=[214/255, 39/255, 40/255])#[1., 0.3, 0.3])
+                plt.tight_layout()
+                plt.savefig('/home/pi/Desktop/pictortelescope/map.png', bbox_inches='tight')
+                await message.channel.send('<@!'+str(message.author.id)+ '> The telescope is currently pointing to **RA = '+str(round(ra,1))+'°**, **Dec. = '+str(round(dec,1))+'°** (**𝑙 = '+str(round(virgo.galactic(ra,dec)[0],1))+'°**, **𝑏 = '+str(round(virgo.galactic(ra,dec)[1],1))+'°**):', file=discord.File('/home/pi/Desktop/pictortelescope/map.png'))
         client.run(token)
     #except Exception as e:
     #    print(e)
