@@ -13,6 +13,9 @@ The goal of this effort is to introduce students, educators, astronomers and oth
 
 PICTOR is a **fully open source** (software & hardware) project.
 
+## Northern Sky HI Survey obtained with PICTOR
+![alt text](https://i.imgur.com/pYgMAhW.png "PICTOR HI Survey")
+
 ## Technical Details (Telescope Specifications)
 **Telescope diameter:** 1.5m (4.92 ft = 59.05")  
 **Focal Ratio (F/D):** 0.411 (prime focus antenna)  
