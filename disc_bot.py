@@ -19,7 +19,7 @@ brr = np.flip(test, 1)
 while True:
     if True:
         #load_dotenv()
-        token = 'NjM5NDYyNzA1NzIzNjA1MDEz.XbroDQ.0JwJgdJBAfdfmL-ctPBbhQYE9Qo'
+        token = 'xxx'
         client = discord.Client()
         
         @client.event
