@@ -51,7 +51,7 @@ while True:
                 await message.add_reaction('❌')
                 await message.channel.send('The telescope is currently observing. Please wait until it\'s done before submitting your observation...')
                 return
-            elif ((message.content).startswith('<@!639462') or (message.content).startswith('<@639462') or ((message.content).lower()).startswith('@pictor')) and '639462705723605013>' in message.content and 'observe' not in (message.content).lower()  and 'map' not in (message.content).lower():
+            elif ((message.content).startswith('<@!639462') or (message.content).startswith('<@639462') or ((message.content).lower()).startswith('@pictor')) and '639462705723605013>' in message.content and 'observe' not in (message.content).lower()  and 'map' not in (message.content).lower() and 'simulate' not in (message.content).lower():
                 print(3)
                 await message.channel.send('**PICTOR** is an open-source radio telescope that allows anyone to observe the radio sky using its convenient web platform for **free**! This bot allows you to submit observations directly from Discord. For more info, visit <https://www.pictortelescope.com> or ping <@!234246004424179712> for help!\n\n**Usage:**\n```@PICTOR observe <duration (in seconds)>\n@PICTOR map\n@PICTOR simulate <l> <b>```\n**Example:**\n```@PICTOR observe 60```\n**Default observation parameters:**\n```\nCenter frequency: 1420 MHz\nBandwidth: 2.4 MHz\nNumber of channels: 2048\nNumber of bins: 100```')
                 return
