@@ -1,3 +1,4 @@
+import virgo
 import os
 import sys
 import requests
@@ -15,7 +16,7 @@ while True:
         #Get observation parameters
         sleep(10)
         try:
-            response = requests.get('https://pictortelescope.com/last_obs.txt', auth=('XXX', 'XXX')) #plaintext credentials
+            response = requests.get('https://pictortelescope.com/last_obs.txt', auth=('pictor', 'XXX')) #plaintext credentials
             if response.status_code == 200:
                 exec(response.content)
                 if id not in open('/home/pi/Desktop/pictortelescope/id_history.txt').read() and 'notpictor' not in obs_name:
@@ -45,8 +46,8 @@ while True:
     try:
         os.remove('/home/pi/Desktop/pictortelescope/observation.dat')
         os.remove('/home/pi/Desktop/pictortelescope/plot.png')
-        os.remove('/home/pi/Desktop/pictortelescope/data_freq.csv')
-        os.remove('/home/pi/Desktop/pictortelescope/data_time.csv')
+        os.remove('/home/pi/Desktop/pictortelescope/spectrum.csv')
+        os.remove('/home/pi/Desktop/pictortelescope/time_series.csv')
     except OSError:
         pass
     
@@ -55,17 +56,43 @@ while True:
         currentDT = datetime.datetime.now()
         obsDT = currentDT.strftime("%Y-%m-%d %H:%M:%S")
         obsDTfile = currentDT.strftime("%Y%m%d%H%M%S")
+        #Execute observation with parameters
+        # Define observation parameters
+        t_sample = int(nbins)*int(channels)/float(bandwidth)
+        observation = {
+    'dev_args': '',
+    'rf_gain': 30,
+    'if_gain': 30,
+    'bb_gain': 30,
+    'frequency': float(f_center),
+    'bandwidth': float(bandwidth),
+    'channels': int(channels),
+    't_sample': t_sample,
+    'duration': float(duration)
+        }
+        # Data acquisition
         #Execute top_block.py with parameters
-        sys.argv = ['top_block.py', '--c-freq='+f_center, '--samp-rate='+bandwidth, '--nchan='+channels, '--nbin='+nbins, '--obs-time='+duration]
-        execfile('/home/pi/Desktop/pictortelescope/top_block.py')
+        #sys.argv = ['top_block.py', '--c-freq='+f_center, '--samp-rate='+bandwidth, '--nchan='+channels, '--nbin='+nbins, '--obs-time='+duration]
+        #execfile('/home/pi/Desktop/pictortelescope/top_block.py')
+        virgo.observe(obs_parameters=observation, spectrometer='wola', obs_file='/home/pi/Desktop/pictortelescope/observation.dat')
         copy2('/home/pi/Desktop/pictortelescope/observation.dat', '/home/pi/Desktop/pictortelescope/obs_archive/'+str(obsDTfile)+'.dat')
         #Execute plotter
-        if f_center == '1420000000.0' and bandwidth == '2400000' and (channels == '1024' or channels == '2048'):
-            sys.argv = ['plot_hi.py', 'freq='+f_center, 'samp_rate='+bandwidth, 'nchan='+channels, 'nbin='+nbins]
-            execfile('/home/pi/Desktop/pictortelescope/plot_hi.py')
+        if f_center == '1420000000.0' and (bandwidth == '2400000' or bandwidth == '3200000') and (channels == '1024' or channels == '2048'):
+                if channels == '1024' and bandwidth == '2400000':
+                        cal_file = '/home/pi/Desktop/pictortelescope/off1024.dat'
+                elif channels == '2048' and bandwidth == '2400000':
+                        cal_file = '/home/pi/Desktop/pictortelescope/off2048.dat'
+                elif channels == '2048' and bandwidth == '3200000':
+                        cal_file = '/home/pi/Desktop/pictortelescope/off2048_3_2.dat'
+                else:
+                        cal_file = ''
         else:
-            sys.argv = ['plot.py', 'freq='+f_center, 'samp_rate='+bandwidth, 'nchan='+channels, 'nbin='+nbins]
-            execfile('/home/pi/Desktop/pictortelescope/plot.py')
+                cal_file = ''
+        
+        # Data analysis
+        virgo.plot(obs_parameters=observation, n=20, m=20, f_rest=1420.4057517667e6,
+                   obs_file='/home/pi/Desktop/pictortelescope/observation.dat', cal_file=cal_file,
+                   spectra_csv='/home/pi/Desktop/pictortelescope/spectrum.csv', power_csv='/home/pi/Desktop/pictortelescope/time_series.csv', plot_file='/home/pi/Desktop/pictortelescope/plot.png')
         
         with open('/home/pi/Desktop/pictortelescope/id_history.txt', 'a') as id_logfile:
             id_logfile.write(id+'\n')
@@ -87,7 +114,7 @@ while True:
         
         body = '''Your observation has been carried out by PICTOR successfully!
 Observation name: '''+obs_name+'''
-Observation datetime: '''+obsDT+''' (UTC+3)
+Observation datetime: '''+obsDT+''' (UTC+2)
 Center frequency: '''+f_center+''' Hz
 Bandwidth: '''+bandwidth+''' Hz
 Sample rate: '''+bandwidth+''' samples/sec
@@ -110,7 +137,7 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         msg.attach(p1)
         if (raw_data == '1'):
             #Add spectrum Data
-            filename2 = 'data_spectrum.csv'
+            filename2 = 'spectrum.csv'
             attachment2 = open("/home/pi/Desktop/pictortelescope/"+filename2, 'rb')
 
             p2 = MIMEBase('application', 'octet-stream')
@@ -121,7 +148,7 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
             msg.attach(p2)
 
             #Add Time vs. Power Data
-            filename3 = 'data_time_power.csv'
+            filename3 = 'time_series.csv'
             attachment3 = open("/home/pi/Desktop/pictortelescope/"+filename3, 'rb')
 
             p3 = MIMEBase('application', 'octet-stream')
@@ -164,7 +191,7 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         body = '''Your observation has been carried out by PICTOR successfully!
 Observer email: '''+email+'''
 Observation name: '''+obs_name+'''
-Observation datetime: '''+obsDT+''' (UTC+3)
+Observation datetime: '''+obsDT+''' (UTC+2)
 Center frequency: '''+f_center+''' Hz
 Bandwidth: '''+bandwidth+''' Hz
 Sample rate: '''+bandwidth+''' samples/sec
@@ -180,14 +207,14 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         attachment1 = open("/home/pi/Desktop/pictortelescope/"+filename1, 'rb')
         
         p1 = MIMEBase('application', 'octet-stream')
-        p1.set_payload((attachment).read())
+        p1.set_payload((attachment1).read())
         
         encoders.encode_base64(p1)
-        p1.add_header('Content-Disposition', 'attachment; filename= %s' % filename)
+        p1.add_header('Content-Disposition', 'attachment; filename= %s' % filename1)
         msg.attach(p1)
 
         #Add spectrum Data
-        filename2 = 'data_spectrum.csv'
+        filename2 = 'spectrum.csv'
         attachment2 = open("/home/pi/Desktop/pictortelescope/"+filename2, 'rb')
 
         p2 = MIMEBase('application', 'octet-stream')
@@ -198,7 +225,7 @@ Your observation's averaged spectrum, dynamic spectrum (waterfall) and Power vs 
         msg.attach(p2)
 
         #Add Time vs. Power Data
-        filename3 = 'data_time_power.csv'
+        filename3 = 'time_series.csv'
         attachment3 = open("/home/pi/Desktop/pictortelescope/"+filename3, 'rb')
 
         p3 = MIMEBase('application', 'octet-stream')
