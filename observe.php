@@ -116,7 +116,7 @@ fclose($statusFile);
             </div>
 
             <div class="wrap-input100">
-                <div class="label-input100">Would you like to recieve your raw data as a .csv file?</div>
+                <div class="label-input100">Would you like to receive your raw data as a .csv file?</div>
                 <div>
                     <select class="js-select2" name="raw_data">
                         <option value="0" selected="selected">No</option>
