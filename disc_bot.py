@@ -117,8 +117,8 @@ while True:
                     await message.channel.send('Observing for **'+duration+' seconds** with PICTOR. Please wait...')
                     await client.change_presence(status=discord.Status.idle, activity=discord.Game('Observing...'))
                     observing = True
-                    myobj = {'obs_name': 'discord_obs', 'f_center': '1420', 'bandwidth': '2.4mhz', 'channels': '2048', 'nbins': '100', 'duration': duration, 'email': 'coto_dup@hotmail.com', 'submit_btn': '1'}
-                    requests.post('https://pictortelescope.com/observe.php', data = myobj)
+                    obs_args = {'obs_name': 'discord_obs', 'f_center': '1420', 'bandwidth': '2.4mhz', 'channels': '2048', 'nbins': '100', 'duration': duration, 'email': 'coto_dup@hotmail.com', 'submit_btn': '1'}
+                    requests.post('https://pictortelescope.com/observe.php', data = obs_args)
                     try:
                         os.remove('/home/pi/Desktop/pictortelescope/observation.dat')
                         os.remove('/home/pi/Desktop/pictortelescope/plot.png')
