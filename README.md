@@ -7,7 +7,7 @@ PICTOR is an open-source radio telescope that allows anyone to observe the radio
 
 
 ## About PICTOR
-PICTOR consists of a 1.5-meter parabolic antenna that allows anyone to make continuous and spectral (i.e. [hydrogen line](https://www.cv.nrao.edu/course/astr534/HILine.html)) drift-scan observations of the radio sky in the **1300~1700 MHz** regime for free. 
+PICTOR consists of a 1.5-meter parabolic antenna that allows anyone to make continuous and spectral (i.e. [hydrogen line](https://en.wikipedia.org/wiki/Hydrogen_line)) drift-scan observations of the radio sky in the **1300~1700 MHz** regime for free. 
 
 The goal of this effort is to introduce students, educators, astronomers and others to the majesty of the radio sky, **promoting radio astronomy education**, *without* the need of building a large and expensive radio telescope. 
 
@@ -24,7 +24,7 @@ PICTOR is a **fully open source** (software & hardware) project.
 **Two-stage low-noise amplifier (LNA):** Gain: 30 ± 2 dB - Noise figure (NF): < 0.5 dB  
 **High-pass filter:** -30 dBc below 900 MHz  
 ~~**Third-stage LNA (used as an in-line amplifier):** Gain: > 9 dB~~ *  
-~~**Band-pass filter:** f_center = 1420 MHz (designed for [hydrogen line](https://www.cv.nrao.edu/course/astr534/HILine.html) observations)~~ *  
+~~**Band-pass filter:** f_center = 1420 MHz (designed for [hydrogen line](https://en.wikipedia.org/wiki/Hydrogen_line) observations)~~ *  
 **Instantaneous bandwidth (IBW):** up to 3.2 MHz (sufficient for spectral observations) *[to be upgraded to 30.72 MHz]*  
 **Number of channels:** up to 2048 (for high frequency-resolution observations) *[to be upgraded to 16384]*  
 
