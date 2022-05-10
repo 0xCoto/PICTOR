@@ -20,7 +20,7 @@ PICTOR is a **fully open source** (software & hardware) project.
 **Telescope diameter:** 1.5m (4.92 ft = 59.05")  
 **Focal Ratio (F/D):** 0.411 (prime focus antenna)  
 **Beamwidth (HPBW @ 1420 MHz):** \~8.95° (*k* factor = 63.64)  
-**Operating frequency range:** 1300\~1700 MHz ([L band](https://www.techopedia.com/definition/30820/l-band))  
+**Operating frequency range:** 1300\~1700 MHz ([L band](https://en.wikipedia.org/wiki/L_band))  
 **Two-stage low-noise amplifier (LNA):** Gain: 30 ± 2 dB - Noise figure (NF): < 0.5 dB  
 **High-pass filter:** -30 dBc below 900 MHz  
 ~~**Third-stage LNA (used as an in-line amplifier):** Gain: > 9 dB~~ *  
