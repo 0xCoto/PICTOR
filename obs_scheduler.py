@@ -4,7 +4,7 @@
 '''
 
 '''
-                                        Parameters:
+                            Parameters:
 +------------------------------------------------------------------------------------------------------+
 |   Parameter  | Variable name	|               Use	                       | Accepted values           |
 +--------------+----------------+------------------------------------------+---------------------------+
@@ -161,12 +161,12 @@ def send_data(name='', freq='', bandwidth='', bins='', channels='', duration='',
     # Close the browser
     driver.quit()
 
-
 #init datetime
 dt = datetime.now()
 
 #set target date and time
 target_dt = datetime(dt.year, dt.month, args.d, args.hr, args.mn)#target datetime year, month, day, hours, minutes
+
 #get current date and time
 current_dt = datetime(dt.year, dt.month, dt.day, dt.hour, dt.minute) 
 
@@ -181,8 +181,10 @@ while target_dt != current_dt:
 print("Starting....")
 for i in range (0, args.rt):
 
-    send_data(name=args.n, freq=args.cf, bandwidth=args.bw, bins=args.b, channels=args.ch, duration=args.du, raw=args.rd, email=args.e)
-    print("Done interation: ", i+1, "of: ", args.rt)
+    name = args.n+'_'+str(i+1)
+    print(name)
+    send_data(name=name, freq=args.cf, bandwidth=args.bw, bins=args.b, channels=args.ch, duration=args.du, raw=args.rd, email=args.e)
+    print("Done interation: ", i+1, "of:", args.rt, ",", ((i+1)/args.rt)*100, "%")
 
     #wait for the next iteration
     if (args.rt > 1 and i != args.rt):
