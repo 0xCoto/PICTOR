@@ -3,6 +3,28 @@
     Please Ignore them, as they do not affect the script's functionality
 '''
 
+'''
+                            Parameters:
++------------------------------------------------------------------------------------------------------+
+|   Parameter  | Variable name	|               Use	                       | Accepted values           |
++--------------+----------------+------------------------------------------+---------------------------+
+|      -n	   |    Name	    |   Name for the observation	           |    Any String             |
+|      -cf	   |    Frequency	|   Frequency you want to observe at       |    1300-1700MHz           |    
+|      -bw	   |    Bandwidth	|   The frequency range you want to observe|    {500, 1, 2, 2.4,3.2}   |    
+|      -ch	   |    Channels	|   Data points on frequency axis	       |    {256, 512, 1024, 2048} |
+|      -b	   |    Bins	    |   Duration of each sample	               |    Up to 20000            |
+|      -du	   |    Duration	|   Duration of observation	               |    Up to 600              |
+|      -rd	   |    Raw Data	|   Sends .csv data from observation	   |    {0, 1}                 |
+|      -e	   |    Email	    |   The email to send the data	           |    Any existing email     |
+|      -d	   |    Day	        |   The day to execute the observation	   |    {01, … , 31}           |
+|      -hr	   |    Hour	    |   The hour to execute the observation	   |    {00, … , 23}           |
+|      -mn	   |    Minute	    |   The minute to execute the observation  |    {00, …, 59}            |
+|      -rt	   |    Repeat times|	Times to repeat observation	           |    An integer             |
+|      -i	   |    Interval	|   Time between observations	           |    An integer             |
++------------------------------------------------------------------------------------------------------+
+
+'''
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
@@ -15,7 +37,7 @@ from datetime import datetime
 import argparse
 import os
 
-PICTOR = "https://pictortelescope.com/observe.php"#pictor url
+PICTOR = "https://pictortelescope.com/observe.php"  #pictor url
 
 parser = argparse.ArgumentParser()
 
