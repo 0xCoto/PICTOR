@@ -1,10 +1,6 @@
-'''
-    It is possible that webdriver outputs errors and/or warnings. 
-    Please Ignore them, as they do not affect the script's functionality
-'''
 
 '''
-                            Parameters:
+                                            Parameters:
 +------------------------------------------------------------------------------------------------------+
 |   Parameter  | Variable name	|               Use	                       | Accepted values           |
 +--------------+----------------+------------------------------------------+---------------------------+
