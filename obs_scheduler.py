@@ -1,3 +1,7 @@
+'''
+    It is possible that webdriver outputs errors and/or warnings. 
+    Please Ignore them, as they do not affect the script's functionality
+'''
 
 '''
                             Parameters:
@@ -93,10 +97,16 @@ def send_data(name='', freq='', bandwidth='', bins='', channels='', duration='',
     '''
     Create payload and send HTTP Post request
     '''
+
+    if bandwidth == '500':
+        bandwidth = bandwidth + 'khz'
+    else:
+        bandwidth = bandwidth + 'mhz'
+
     payload = {
         'obs_name': name,
         'f_center': freq, 
-        'bandwidth': bandwidth+'mhz', 
+        'bandwidth': bandwidth, 
         'channels': channels, 
         'nbins': bins, 
         'duration': duration, 
@@ -125,7 +135,6 @@ print("Starting....")
 for i in range (0, args.rt):
 
     name = args.n+'_'+str(i+1)#create name
-    
     #call send_data function
     send_data(name=name, freq=args.cf, bandwidth=args.bw, bins=args.b, channels=args.ch, duration=args.du, raw=args.rd, email=args.e)
 
