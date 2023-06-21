@@ -39,6 +39,31 @@ import os
 
 PICTOR = "https://pictortelescope.com/observe.php"  #pictor url
 
+'''
+To make continuous observations, the step (degrees from last observation) should be half the telsescope's beamwidth (~10 deg => step = 5 deg)
+Time interval is calculated from the earth's rotation frequency:
+
+The Earth completes one full rotation on its axis approximately every 24 hours. 
+Therefore, the Earth spins through 360 degrees in 24 hours. To determine when it would spin 5 degrees,
+we can calculate the time it takes for the Earth to rotate through that angle.
+
+First, we need to calculate the fraction of time it takes for the Earth to rotate 1 degree. 
+Since the Earth takes 24 hours (or 1440 minutes) to complete a full rotation of 360 degrees, 
+the fraction of time it takes for the Earth to rotate 1 degree is:
+
+1 degree / 360 degrees = 1/360
+
+To find the time it takes for the Earth to rotate 5 degrees, 
+we can multiply the fraction we calculated by 5:
+
+(1/360) x 5 = 5/360 = 1/72
+
+Therefore, the Earth will spin 5 degrees in approximately 1/72 of a day
+or about 20 minutes and 53 seconds.
+'''
+
+STEP = 21*60 #turn to seconds by doing minutes*60
+
 parser = argparse.ArgumentParser()
 
 #observation name parameter
@@ -66,7 +91,7 @@ parser.add_argument('-mn', metavar="minute", type=int, required=False, help="min
 #repeat times parameter
 parser.add_argument('-rt', metavar="repeat", type=int, required=False, help="times to repeat observaton", default=1)
 #interval parameter
-parser.add_argument('-i', metavar="interval", type=int, required=False, help="time between observations")
+parser.add_argument('-i', metavar="interval", type=int, required=False, help="time between observations", default=STEP)
 
 args = parser.parse_args()
 
