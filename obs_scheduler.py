@@ -181,7 +181,7 @@ while target_dt != current_dt:
 print("Starting....")
 for i in range (0, args.rt):
 
-    name = args.n+'_'+str(i+1)
+    name = args.n+'_'+str(i+1)#rename observation according to iteration
     print(name)
     send_data(name=name, freq=args.cf, bandwidth=args.bw, bins=args.b, channels=args.ch, duration=args.du, raw=args.rd, email=args.e)
     print("Done interation: ", i+1, "of:", args.rt, ",", ((i+1)/args.rt)*100, "%")
