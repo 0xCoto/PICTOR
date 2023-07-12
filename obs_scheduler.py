@@ -210,7 +210,6 @@ target_dt = datetime(
     dt.year, dt.month, args.d, args.hr, args.mn
 )  # target datetime year, month, day, hours, minutes
 
-print()
 print("Waiting....")
 
 # get current date and time
@@ -250,5 +249,5 @@ for i in range(args.rt):
             print("Next Observation in: ", args.i, "seconds")
         sleep(args.i)
 
-# print ok message and exit
+# print ok message
 print("Observation Request Sent!")
